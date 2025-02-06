@@ -1,1 +1,11 @@
-sed -i 's/from spyne.util.six.moves.collections_abc import MutableSet/from collections.abc import MutableSet/g' /opt/venv/lib/python3.12/site-packages/spyne/util/oset.py
+FROM python:3.10
+
+WORKDIR /app
+
+COPY requirements.txt .
+
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY . .
+
+CMD ["uvicorn", "api:app", "--host", "0.0.0.0", "--port", "8000"]
